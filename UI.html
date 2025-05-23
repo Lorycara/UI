@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=375, initial-scale=1.0">
+    <title>AI Workout Tracker UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+            margin: 0;
+            color: #000;
+        }
+        
+        .device-frame {
+            width: 375px;
+            height: 812px;
+            border-radius: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            background: #fff;
+            overflow: hidden;
+            margin: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .horizontal-scroll {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100vw;
+            min-height: 100vh;
+            background: transparent;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="no-scrollbar">
+    <div class="horizontal-scroll">
+        <!-- Home Page -->
+        <div class="device-frame flex flex-col">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- App Title -->
+                <div class="flex items-center gap-3">
+                    <span class="ph ph-lightning text-2xl text-black"></span>
+                    <h1 class="text-2xl font-bold tracking-tight text-black">AI Workout</h1>
+                </div>
+                <!-- Welcome Card -->
+                <div class="rounded-2xl shadow-lg bg-gradient-to-br from-blue-200 to-purple-200 p-6 flex flex-col gap-2">
+                    <h2 class="text-lg font-semibold text-black">Welcome back!</h2>
+                    <p class="text-black text-opacity-80">Track your workouts, analyze progress, and let AI help you reach your goals.</p>
+                </div>
+                <!-- Quick Actions -->
+                <div class="flex gap-4 mt-2">
+                    <button class="flex-1 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-3 rounded-xl shadow transition hover:scale-105">Start Workout</button>
+                    <button class="flex-1 bg-white border border-blue-200 text-black font-semibold py-3 rounded-xl shadow transition hover:scale-105">Import Plan</button>
+                </div>
+                <!-- Recent Workouts Card -->
+                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3 mt-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-black">Recent Workouts</h3>
+                        <a href="#" class="text-blue-500 text-sm font-medium">See all</a>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Legs & Shoulders</div>
+                                <div class="text-xs text-black text-opacity-60">21 May 2025 · 31s · 3630kg</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Back</div>
+                                <div class="text-xs text-black text-opacity-60">26 May 2024 · 220h 42m · 5056kg</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Progress Graph Card -->
+                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 mt-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-semibold text-black">Workouts Per Week</h3>
+                        <span class="text-xs text-black text-opacity-60">Activity</span>
+                    </div>
+                    <div class="w-full h-32 flex items-end">
+                        <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <polyline
+                                fill="none"
+                                stroke="#7C3AED"
+                                stroke-width="3"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                points="0,70 40,60 80,65 120,50 160,40 200,30 240,20 280,10"
+                            />
+                            <circle cx="0" cy="70" r="3" fill="#7C3AED" />
+                            <circle cx="40" cy="60" r="3" fill="#7C3AED" />
+                            <circle cx="80" cy="65" r="3" fill="#7C3AED" />
+                            <circle cx="120" cy="50" r="3" fill="#7C3AED" />
+                            <circle cx="160" cy="40" r="3" fill="#7C3AED" />
+                            <circle cx="200" cy="30" r="3" fill="#7C3AED" />
+                            <circle cx="240" cy="20" r="3" fill="#7C3AED" />
+                            <circle cx="280" cy="10" r="3" fill="#7C3AED" />
+                            <!-- X Axis Labels -->
+                            <text x="0" y="78" font-size="10" fill="#000">31/3</text>
+                            <text x="40" y="78" font-size="10" fill="#000">7/4</text>
+                            <text x="80" y="78" font-size="10" fill="#000">14/4</text>
+                            <text x="120" y="78" font-size="10" fill="#000">21/4</text>
+                            <text x="160" y="78" font-size="10" fill="#000">28/4</text>
+                            <text x="200" y="78" font-size="10" fill="#000">5/5</text>
+                            <text x="240" y="78" font-size="10" fill="#000">12/5</text>
+                            <text x="280" y="78" font-size="10" fill="#000">19/5</text>
+                            <!-- Y Axis -->
+                            <text x="-5" y="70" font-size="10" fill="#000">0</text>
+                            <text x="-5" y="30" font-size="10" fill="#000">3</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Navigation -->
+            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
+                <button class="flex flex-col items-center text-blue-500"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
+                <button class="flex flex-col items-center text-black"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            </nav>
+        </div>
+        <!-- Workout Tracking Page -->
+        <div class="device-frame flex flex-col">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- Header -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-arrow-left text-xl text-black"></span></button>
+                        <h2 class="text-xl font-bold text-black ml-2">Legs & Shoulders</h2>
+                    </div>
+                    <button class="bg-green-400 text-white font-semibold px-4 py-2 rounded-xl shadow hover:scale-105 transition">Finish</button>
+                </div>
+                <!-- Workout Info Card -->
+                <div class="rounded-2xl bg-gradient-to-br from-blue-100 to-purple-100 shadow p-4 flex items-center gap-4">
+                    <span class="ph ph-calendar text-lg text-black"></span>
+                    <span class="text-black font-medium">23 May 2025</span>
+                    <span class="ph ph-timer text-lg text-black ml-4"></span>
+                    <span class="text-black font-medium">0:03</span>
+                </div>
+                <!-- Exercise Card: Seated Leg Press -->
+                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                            <span class="font-semibold text-black">Seated Leg Press (Machine)</span>
+                        </div>
+                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-link text-black"></span></button>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 text-xs font-medium text-black text-opacity-70 mt-2">
+                        <div>Set</div>
+                        <div>kg</div>
+                        <div>Reps</div>
+                        <div>Done</div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">W</div>
+                            <div class="text-black">60</div>
+                            <div class="text-black">15</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">W</div>
+                            <div class="text-black">80</div>
+                            <div class="text-black">15</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">1</div>
+                            <div class="text-black">110</div>
+                            <div class="text-black">10</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">2</div>
+                            <div class="text-black">110</div>
+                            <div class="text-black">8</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">3</div>
+                            <div class="text-black">110</div>
+                            <div class="text-black">8</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 items-center">
+                            <div class="text-black">4</div>
+                            <div class="text-black">110</div>
+                            <div class="text-black">6</div>
+                            <span class="ph ph-check text-green-400"></span>
+                        </div>
+                    </div>
+                    <button class="mt-2 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-2 rounded-xl shadow hover:scale-105 transition">+ Add Set</button>
+                </div>
+                <!-- Exercise Card: Leg Extension -->
+                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                            <span class="font-semibold text-black">Leg Extension (Machine)</span>
+                        </div>
+                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-link text-black"></span></button>
+                    </div>
+                    <div class="flex flex-col gap-2 mt-2">
+                        <div class="bg-blue-50 rounded-lg p-2 text-black text-opacity-70">una gamba</div>
+                        <div class="bg-blue-50 rounded-lg p-2 text-black text-opacity-70">alzare</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Navigation (same as Home) -->
+            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
+                <button class="flex flex-col items-center text-blue-500"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
+                <button class="flex flex-col items-center text-black"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            </nav>
+        </div>
+        <!-- Start Page -->
+        <div class="device-frame flex flex-col">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="ph ph-plus-circle text-2xl text-blue-500"></span>
+                    <h1 class="text-2xl font-bold tracking-tight text-black">Start Workout</h1>
+                </div>
+                <!-- Start Empty Workout -->
+                <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-2xl shadow-lg text-lg transition hover:scale-105">Start an Empty Workout</button>
+                <!-- My Templates -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-semibold text-black">My Templates</h2>
+                        <button class="bg-white border border-blue-200 text-black rounded-xl px-3 py-1 text-xs font-medium shadow hover:scale-105 transition">+ Template</button>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Legs & Shoulders</div>
+                                <div class="text-xs text-black text-opacity-60">Seated Leg Press, Leg Extension...</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Back</div>
+                                <div class="text-xs text-black text-opacity-60">Lat Machine, Row, Pulldown...</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Example Templates -->
+                <div>
+                    <div class="flex items-center justify-between mb-2 mt-4">
+                        <h2 class="text-lg font-semibold text-black">Example Templates</h2>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Strong 5x5 - Workout B</div>
+                                <div class="text-xs text-black text-opacity-60">Squat, Overhead Press, Deadlift</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition">
+                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                            <div class="flex-1">
+                                <div class="font-medium text-black">Legs</div>
+                                <div class="text-xs text-black text-opacity-60">Squat, Leg Extension, Calf Raise</div>
+                            </div>
+                            <span class="ph ph-arrow-right text-black"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Navigation (Start Active) -->
+            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
+                <button class="flex flex-col items-center text-black"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
+                <button class="flex flex-col items-center text-blue-500"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            </nav>
+        </div>
+        <!-- Scan Workout Plan Page -->
+        <div class="device-frame flex flex-col">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="ph ph-camera text-2xl text-blue-500"></span>
+                    <h1 class="text-2xl font-bold tracking-tight text-black">Scan Workout Plan</h1>
+                </div>
+                <!-- Camera Preview Placeholder -->
+                <div class="flex-1 flex flex-col items-center justify-center">
+                    <div class="w-full h-72 bg-gray-200 rounded-2xl flex items-center justify-center overflow-hidden mb-4 shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2d471c?auto=format&fit=crop&w=375&q=80" alt="Camera Preview" class="object-cover w-full h-full" />
+                    </div>
+                    <button class="w-40 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-3 rounded-xl shadow-lg text-lg transition hover:scale-105 flex items-center justify-center gap-2">
+                        <span class="ph ph-camera"></span> Take Photo
+                    </button>
+                    <p class="text-black text-opacity-60 text-sm mt-4 text-center">Point your camera at your workout plan and tap 'Take Photo' to extract your exercises automatically.</p>
+                </div>
+            </div>
+            <!-- Bottom Navigation -->
+            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
+                <button class="flex flex-col items-center text-black"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
+                <button class="flex flex-col items-center text-blue-500"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>
