@@ -339,9 +339,10 @@
             </div>
         </div>
     </div>
-    <!-- Detected Workout Plan Page (vertically scrollable, new line) -->
-    <div class="flex justify-center w-full">
-        <div class="device-frame flex flex-col" style="margin: 2rem auto;">
+    <!-- Second row: Detected Plan and Edit Exercise -->
+    <div class="horizontal-scroll">
+        <!-- Detected Workout Plan Page -->
+        <div class="device-frame flex flex-col" style="margin: 2rem;">
             <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
                 <!-- Header -->
                 <div class="flex items-center gap-3 mb-2">
@@ -491,6 +492,56 @@
             <!-- Save Workout Button -->
             <div class="p-6 bg-white border-t border-gray-100 rounded-b-2xl">
                 <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Save workout</button>
+            </div>
+        </div>
+        <!-- Edit Exercise Page -->
+        <div class="device-frame flex flex-col">
+            <form class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="ph ph-pencil text-2xl text-blue-500"></span>
+                    <h1 class="text-2xl font-bold tracking-tight text-black">Edit Exercise</h1>
+                </div>
+                <!-- Form Fields -->
+                <div class="flex flex-col gap-4">
+                    <div>
+                        <label class="block text-black font-medium mb-1" for="exercise-name">Exercise Name</label>
+                        <input id="exercise-name" type="text" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="Seated Leg Press (Machine)">
+                    </div>
+                    <div>
+                        <label class="block text-black font-medium mb-1" for="exercise-type">Type</label>
+                        <select id="exercise-type" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
+                            <option>Machine</option>
+                            <option>Dumbbell</option>
+                            <option>Barbell</option>
+                            <option>Bodyweight</option>
+                            <option>Cable</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <label class="block text-black font-medium mb-1" for="sets">Sets</label>
+                            <input id="sets" type="number" min="1" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="4">
+                        </div>
+                        <div class="flex-1">
+                            <label class="block text-black font-medium mb-1" for="weight">Weight (kg)</label>
+                            <input id="weight" type="number" min="0" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="110">
+                        </div>
+                        <div class="flex-1">
+                            <label class="block text-black font-medium mb-1" for="reps">Reps</label>
+                            <input id="reps" type="number" min="1" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="10">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-black font-medium mb-1" for="notes">Notes</label>
+                        <textarea id="notes" rows="2" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" placeholder="Add any notes..."></textarea>
+                    </div>
+                </div>
+            </form>
+            <!-- Save Changes Button -->
+            <div class="p-6 bg-white border-t border-gray-100 rounded-b-2xl">
+                <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Save Changes</button>
             </div>
         </div>
     </div>
