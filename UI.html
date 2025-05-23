@@ -27,9 +27,9 @@
             --theme-text-interactive-secondary: #000000;
             /* Text on secondary CTA */
             --theme-accent: #7C3AED;
-            /* Purple accent */
-            --theme-accent-alt: #3b82f6;
-            /* Blue accent */
+            /* Main Purple accent */
+            --theme-accent-light: #a78bfa;
+            /* Lighter Purple for gradients */
             --theme-border-subtle: #e5e7eb;
             /* Light borders */
             --theme-icon-primary: #000000;
@@ -160,10 +160,6 @@
             color: var(--theme-accent) !important;
         }
         
-        .text-theme-accent-alt {
-            color: var(--theme-accent-alt) !important;
-        }
-        
         .border-theme-subtle {
             border-color: var(--theme-border-subtle) !important;
         }
@@ -174,12 +170,12 @@
         /* Specific overrides for elements that used Tailwind colors directly */
         
         .welcome-card-gradient {
-            background: linear-gradient(to bottom right, var(--theme-accent-alt), var(--theme-accent));
+            background: linear-gradient(to bottom right, var(--theme-accent-light), var(--theme-accent));
         }
         /* Example for a gradient that needs to adapt */
         
         body.dark-mode .welcome-card-gradient {
-            background: linear-gradient(to bottom right, #2a3a57, #4a2e6b);
+            background: linear-gradient(to bottom right, #5b3a93, var(--theme-accent));
         }
         /* Dark mode specific gradient */
         
@@ -206,15 +202,23 @@
             background-color: var(--theme-bg-primary);
             /* Or a specific input bg var */
             color: var(--theme-text-primary);
+            /* Added transition for focus effects */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        
+        .input-field-style:focus {
+            border-color: var(--theme-accent);
+            box-shadow: 0 0 0 2px var(--theme-accent-light);
+            outline: none;
         }
         
         select.input-field-style {
             /* For select arrow in dark mode */
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%23000000\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3e%3c/svg%3e");
         }
         
         body.dark-mode select.input-field-style {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%23ffffff\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3e%3c/svg%3e");
         }
         
         .text-on-gradient {
@@ -223,12 +227,12 @@
         /* Themeable Shadows */
         
         .shadow-theme {
-            /* Equivalent to Tailwind's 'shadow' or 'shadow-md' */
+            /* Equivalent to Tailwind\'s \'shadow\' or \'shadow-md\' */
             box-shadow: 0 4px 6px -1px var(--theme-shadow-color), 0 2px 4px -2px var(--theme-shadow-color);
         }
         
         .shadow-lg-theme {
-            /* Equivalent to Tailwind's 'shadow-lg' */
+            /* Equivalent to Tailwind\'s \'shadow-lg\' */
             box-shadow: 0 10px 15px -3px var(--theme-shadow-color), 0 4px 6px -4px var(--theme-shadow-color);
         }
         
@@ -280,7 +284,7 @@
                             <span class="ph ph-arrow-right icon-theme-primary"></span>
                         </div>
                         <div class="flex items-center gap-3 p-2 rounded-2xl hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
                                 <div class="font-semibold text-theme-primary">Back</div>
                                 <div class="text-xs text-theme-secondary">26 May 2024 · 220h 42m · 5056kg</div>
@@ -315,7 +319,7 @@
         </div>
         <!-- Workout Tracking Page -->
         <div class="device-frame flex flex-col">
-            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto animate-fadeIn animate-slideUp">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-arrow-left text-xl icon-theme-primary"></span></button>
@@ -386,7 +390,7 @@
                 <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-3 animate-fadeIn animate-slideUp shadow-theme">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <span class="font-semibold text-theme-primary">Leg Extension (Machine)</span>
                         </div>
                         <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-link icon-theme-primary"></span></button>
@@ -404,9 +408,9 @@
         </div>
         <!-- Start Page -->
         <div class="device-frame flex flex-col">
-            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto animate-fadeIn animate-slideUp">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="ph ph-plus-circle text-2xl text-theme-accent-alt"></span>
+                    <span class="ph ph-plus-circle text-2xl text-theme-accent"></span>
                     <h1 class="text-2xl font-extrabold text-theme-primary">Start Workout</h1>
                 </div>
                 <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Start an Empty Workout</button>
@@ -425,7 +429,7 @@
                             <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
                         <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
-                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
                                 <div class="font-medium text-theme-primary">Back</div>
                                 <div class="text-xs text-theme-secondary">Lat Machine, Row, Pulldown...</div>
@@ -448,7 +452,7 @@
                             <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
                         <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
-                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
                                 <div class="font-medium text-theme-primary">Legs</div>
                                 <div class="text-xs text-theme-secondary">Squat, Leg Extension, Calf Raise</div>
@@ -460,7 +464,7 @@
             </div>
             <nav class="flex justify-around items-center py-3 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
                 <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-house text-xl icon-theme-primary"></span><span class="text-xs font-semibold text-theme-primary">Home</span></button>
-                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95 text-theme-accent-alt"><span class="ph ph-plus-circle text-xl "></span><span class="text-xs font-semibold">Start</span></button>
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95 text-theme-accent"><span class="ph ph-plus-circle text-xl "></span><span class="text-xs font-semibold">Start</span></button>
             </nav>
         </div>
     </div>
@@ -478,7 +482,7 @@
             </div>
             <div class="flex-1 flex items-center justify-center relative">
                 <img src='./images.jpeg' alt='Camera preview' class='absolute inset-0 w-full h-full object-cover' />
-                <div class="absolute inset-0 bg-black bg-opacity-40"></div> {/* Darker overlay for better text/icon visibility */}
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none animate-fadeIn animate-slideUp">
                     <div class="border-2 border-white border-opacity-90 rounded-2xl animate-fadeIn animate-slideUp shadow-lg-theme" style="width: 240px; height: 180px;"></div>
                 </div>
@@ -488,43 +492,206 @@
                     <button class="rounded-full p-6 border-4 transition hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive border-color-theme-text-interactive shadow-lg-theme"></button>
                 </div>
             </div>
+        </div>
+
+        <!-- Loading Page: Creating Workout Plan from Picture -->
+        <div class="device-frame flex flex-col justify-center items-center">
+            <div class="flex flex-col items-center justify-center flex-1 w-full">
+                <div class="rounded-2xl p-8 flex flex-col items-center gap-6 animate-fadeIn animate-slideUp bg-theme-primary shadow-lg-theme" style="min-width: 280px; max-width: 320px;">
+                    <svg class="animate-spin h-14 w-14 text-theme-accent" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V8a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <div class="text-xl font-semibold text-theme-primary text-center">Creating the workout plan from the picture</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detected Workout Plan Page -->
+        <div class="device-frame flex flex-col" style="margin: 2rem;">
+            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto animate-fadeIn animate-slideUp">
+                <div class="text-sm font-bold text-theme-secondary mb-1">AI Workout</div>
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="ph ph-detective text-2xl text-theme-accent"></span>
+                    <h1 class="text-2xl font-extrabold text-theme-primary">Detected Workout Plan</h1>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
+                                <span class="font-semibold text-theme-primary">Seated Leg Press (Machine)</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>4 sets</div>
+                            <div>110 kg</div>
+                            <div>8-10 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
+                                <span class="font-semibold text-theme-primary">Leg Extension (Machine)</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>3 sets</div>
+                            <div>60 kg</div>
+                            <div>12 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
+                                <span class="font-semibold text-theme-primary">Romanian Deadlift</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>4 sets</div>
+                            <div>80 kg</div>
+                            <div>10 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-yellow-400\"></span>
+                                <span class="font-semibold text-theme-primary">Lateral Raise (Dumbbell)</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>3 sets</div>
+                            <div>10 kg</div>
+                            <div>12 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-green-500\"></span>
+                                <span class="font-semibold text-theme-primary">Military Press (Dumbbells)</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>4 sets</div>
+                            <div>16 kg</div>
+                            <div>10 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-pink-500\"></span>
+                                <span class="font-semibold text-theme-primary">Seated Calf Raise</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>5 sets</div>
+                            <div>60 kg</div>
+                            <div>15 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-cyan-500\"></span>
+                                <span class="font-semibold text-theme-primary">Rear Delt Fly</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>3 sets</div>
+                            <div>8 kg</div>
+                            <div>15 reps</div>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp shadow-theme">
+                        <div class="flex items-center gap-2 mb-1 justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="ph ph-dumbbell text-xl text-gray-700\"></span>
+                                <span class="font-semibold text-theme-primary">Plank</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-full hover:bg-theme-interactive-secondary transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-lg icon-theme-primary"></span></button>
+                                <button class="p-2 rounded-full hover:bg-red-400 hover:text-white transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-theme-secondary text-sm">
+                            <div>3 sets</div>
+                            <div>—</div>
+                            <div>60 sec</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="p-6 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
                 <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Save workout</button>
             </div>
         </div>
+
         <!-- Edit Exercise Page -->
         <div class="device-frame flex flex-col">
-            <form class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+            <form class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto animate-fadeIn animate-slideUp">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="ph ph-pencil text-2xl text-theme-accent-alt"></span>
+                    <span class="ph ph-pencil text-2xl text-theme-accent"></span>
                     <h1 class="text-2xl font-extrabold text-theme-primary">Edit Exercise</h1>
                 </div>
                 <div class="flex flex-col gap-4">
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-name-edit">Exercise Name</label>
-                        <input id="exercise-name-edit" type="text" class="w-full rounded-xl p-3 transition input-field-style" value="Seated Leg Press (Machine)">
+                        <input id="exercise-name-edit" type="text" class="w-full rounded-xl p-3 input-field-style" value="Seated Leg Press (Machine)">
                     </div>
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-type-edit">Type</label>
-                        <select id="exercise-type-edit" class="w-full rounded-xl p-3 transition input-field-style">
+                        <select id="exercise-type-edit" class="w-full rounded-xl p-3 input-field-style">
                             <option>Machine</option> <option>Dumbbell</option> <option>Barbell</option> <option>Bodyweight</option> <option>Other</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-sets-edit">Sets</label>
-                        <input id="exercise-sets-edit" type="number" class="w-full rounded-xl p-3 transition input-field-style" value="4">
+                        <input id="exercise-sets-edit" type="number" class="w-full rounded-xl p-3 input-field-style" value="4">
                     </div>
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-weight-edit">Weight (kg)</label>
-                        <input id="exercise-weight-edit" type="number" step="0.5" class="w-full rounded-xl p-3 transition input-field-style" value="110">
+                        <input id="exercise-weight-edit" type="number" step="0.5" class="w-full rounded-xl p-3 input-field-style" value="110">
                     </div>
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-reps-edit">Reps</label>
-                        <input id="exercise-reps-edit" type="text" class="w-full rounded-xl p-3 transition input-field-style" value="8-10">
+                        <input id="exercise-reps-edit" type="text" class="w-full rounded-xl p-3 input-field-style" value="8-10">
                     </div>
                     <div>
                         <label class="block text-theme-primary font-medium mb-1" for="exercise-notes-edit">Notes</label>
-                        <textarea id="exercise-notes-edit" rows="3" class="w-full rounded-xl p-3 transition input-field-style" placeholder="e.g., focus on form, slow eccentric..."></textarea>
+                        <textarea id="exercise-notes-edit" rows="3" class="w-full rounded-xl p-3 input-field-style" placeholder="e.g., focus on form, slow eccentric..."></textarea>
                     </div>
                 </div>
             </form>
