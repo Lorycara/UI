@@ -325,6 +325,33 @@
                 <button class="flex flex-col items-center text-blue-500 transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
             </nav>
         </div>
+    </div>
+    <div class="horizontal-scroll">
+        <!-- Camera/Scan Workout Page -->
+        <div class="device-frame flex flex-col relative overflow-hidden">
+            <!-- Top Bar -->
+            <div class="flex items-center justify-between px-4 pt-4 pb-2 bg-white bg-opacity-60 rounded-t-2xl shadow-sm">
+                <button class="bg-white bg-opacity-80 rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-arrow-left text-xl text-black"></span></button>
+                <span class="text-base font-semibold text-black">Scan Workout</span>
+                <button class="bg-white bg-opacity-80 rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-dots-three-outline text-xl text-black"></span></button>
+            </div>
+            <!-- Camera Preview (background image) -->
+            <div class="flex-1 flex items-center justify-center relative">
+                <img src='./images.jpeg' alt='Camera preview' class='absolute inset-0 w-full h-full object-cover' />
+                <!-- Subtle dark overlay for contrast -->
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <!-- Overlay Frame -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="border-2 border-white border-opacity-90 rounded-2xl shadow-lg" style="width: 240px; height: 180px;"></div>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="relative z-10 flex flex-col items-center pb-8 pt-2 bg-white bg-opacity-60 rounded-b-2xl shadow-sm">
+                <div class="flex items-center justify-center h-20">
+                    <button class="bg-white rounded-full p-6 shadow-lg border-4 border-black transition hover:scale-105 active:scale-95"></button>
+                </div>
+            </div>
+        </div>
         <!-- Loading Page: Creating Workout Plan from Picture -->
         <div class="device-frame flex flex-col justify-center items-center">
             <div class="flex flex-col items-center justify-center flex-1 w-full">
@@ -338,12 +365,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Second row: Detected Plan and Edit Exercise -->
-    <div class="horizontal-scroll">
         <!-- Detected Workout Plan Page -->
         <div class="device-frame flex flex-col" style="margin: 2rem;">
             <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
+                <!-- App Name -->
+                <div class="text-sm font-bold text-black text-opacity-60 mb-1">AI Workout</div>
                 <!-- Header -->
                 <div class="flex items-center gap-3 mb-2">
                     <span class="ph ph-detective text-2xl text-blue-500"></span>
@@ -494,6 +520,8 @@
                 <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Save workout</button>
             </div>
         </div>
+    </div>
+    <div class="horizontal-scroll">
         <!-- Edit Exercise Page -->
         <div class="device-frame flex flex-col">
             <form class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
