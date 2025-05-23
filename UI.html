@@ -8,11 +8,66 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
     <style>
+         :root {
+            /* Light Mode (default) */
+            --theme-bg-page-gradient-start: #e0eafc;
+            --theme-bg-page-gradient-end: #cfdef3;
+            --theme-bg-primary: #ffffff;
+            /* Device frame, card backgrounds */
+            --theme-text-primary: #000000;
+            /* Main text, titles */
+            --theme-text-secondary: rgba(0, 0, 0, 0.6);
+            /* Subdued text */
+            --theme-bg-interactive: #000000;
+            /* Primary CTA background */
+            --theme-text-interactive: #ffffff;
+            /* Text on primary CTA */
+            --theme-bg-interactive-secondary: #f5f5f5;
+            /* Secondary CTA background */
+            --theme-text-interactive-secondary: #000000;
+            /* Text on secondary CTA */
+            --theme-accent: #7C3AED;
+            /* Purple accent */
+            --theme-accent-alt: #3b82f6;
+            /* Blue accent */
+            --theme-border-subtle: #e5e7eb;
+            /* Light borders */
+            --theme-icon-primary: #000000;
+            --theme-text-on-gradient: #ffffff;
+            /* Always white for text on gradients */
+            --theme-shadow-color: rgba(0, 0, 0, 0.1);
+            /* Shadow color for light mode */
+        }
+        
+        body.dark-mode {
+            --theme-bg-page-gradient-start: #232526;
+            --theme-bg-page-gradient-end: #414345;
+            --theme-bg-primary: #1e1e1e;
+            /* Dark card backgrounds */
+            --theme-text-primary: #ffffff;
+            /* Light text */
+            --theme-text-secondary: rgba(255, 255, 255, 0.7);
+            --theme-bg-interactive: #ffffff;
+            /* White primary CTA in dark mode */
+            --theme-text-interactive: #000000;
+            /* Black text on white CTA */
+            --theme-bg-interactive-secondary: #2a2a2a;
+            /* Darker secondary CTA */
+            --theme-text-interactive-secondary: #ffffff;
+            /* Accent can remain the same or be adjusted */
+            --theme-border-subtle: #333333;
+            /* Darker borders */
+            --theme-icon-primary: #ffffff;
+            --theme-shadow-color: rgba(200, 200, 200, 0.12);
+            /* Light gray shadow for dark mode */
+        }
+        
         body {
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            background: linear-gradient(135deg, var(--theme-bg-page-gradient-start) 0%, var(--theme-bg-page-gradient-end) 100%);
             min-height: 100vh;
             margin: 0;
-            color: #000;
+            color: var(--theme-text-primary);
+            transition: background 0.3s, color 0.3s;
         }
         
         .device-frame {
@@ -20,12 +75,13 @@
             height: 812px;
             border-radius: 2.5rem;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            background: #fff;
+            background: var(--theme-bg-primary);
             overflow: hidden;
             margin: 2rem;
             display: flex;
             flex-direction: column;
             position: relative;
+            transition: background 0.3s;
         }
         
         .horizontal-scroll {
@@ -42,7 +98,6 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
-        /* Custom Animations */
         
         @keyframes fadeIn {
             from {
@@ -71,508 +126,484 @@
         .animate-slideUp {
             animation: slideUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
         }
+        /* Semantic Utility Classes */
+        
+        .bg-theme-primary {
+            background-color: var(--theme-bg-primary) !important;
+        }
+        
+        .text-theme-primary {
+            color: var(--theme-text-primary) !important;
+        }
+        
+        .text-theme-secondary {
+            color: var(--theme-text-secondary) !important;
+        }
+        
+        .bg-theme-interactive {
+            background-color: var(--theme-bg-interactive) !important;
+        }
+        
+        .text-theme-interactive {
+            color: var(--theme-text-interactive) !important;
+        }
+        
+        .bg-theme-interactive-secondary {
+            background-color: var(--theme-bg-interactive-secondary) !important;
+        }
+        
+        .text-theme-interactive-secondary {
+            color: var(--theme-text-interactive-secondary) !important;
+        }
+        
+        .text-theme-accent {
+            color: var(--theme-accent) !important;
+        }
+        
+        .text-theme-accent-alt {
+            color: var(--theme-accent-alt) !important;
+        }
+        
+        .border-theme-subtle {
+            border-color: var(--theme-border-subtle) !important;
+        }
+        
+        .icon-theme-primary {
+            color: var(--theme-icon-primary) !important;
+        }
+        /* Specific overrides for elements that used Tailwind colors directly */
+        
+        .welcome-card-gradient {
+            background: linear-gradient(to bottom right, var(--theme-accent-alt), var(--theme-accent));
+        }
+        /* Example for a gradient that needs to adapt */
+        
+        body.dark-mode .welcome-card-gradient {
+            background: linear-gradient(to bottom right, #2a3a57, #4a2e6b);
+        }
+        /* Dark mode specific gradient */
+        
+        .progress-graph-stroke {
+            stroke: var(--theme-accent);
+        }
+        
+        .progress-graph-fill {
+            fill: var(--theme-accent);
+        }
+        
+        .button-group-selected {
+            background-color: var(--theme-bg-interactive);
+            color: var(--theme-text-interactive);
+        }
+        
+        .button-group-default {
+            background-color: var(--theme-bg-interactive-secondary);
+            color: var(--theme-text-interactive-secondary);
+        }
+        
+        .input-field-style {
+            border-color: var(--theme-border-subtle);
+            background-color: var(--theme-bg-primary);
+            /* Or a specific input bg var */
+            color: var(--theme-text-primary);
+        }
+        
+        select.input-field-style {
+            /* For select arrow in dark mode */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+        
+        body.dark-mode select.input-field-style {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+        
+        .text-on-gradient {
+            color: var(--theme-text-on-gradient) !important;
+        }
+        /* Themeable Shadows */
+        
+        .shadow-theme {
+            /* Equivalent to Tailwind's 'shadow' or 'shadow-md' */
+            box-shadow: 0 4px 6px -1px var(--theme-shadow-color), 0 2px 4px -2px var(--theme-shadow-color);
+        }
+        
+        .shadow-lg-theme {
+            /* Equivalent to Tailwind's 'shadow-lg' */
+            box-shadow: 0 10px 15px -3px var(--theme-shadow-color), 0 4px 6px -4px var(--theme-shadow-color);
+        }
+        
+        .border-color-theme-text-interactive {
+            border-color: var(--theme-text-interactive) !important;
+        }
     </style>
 </head>
 
 <body class="no-scrollbar">
+    <div class="fixed top-4 right-4 z-50 flex gap-3 p-2 bg-gray-300 bg-opacity-30 rounded-xl shadow-lg">
+        <button id="theme-white-button" class="px-4 py-2 bg-white text-black rounded-lg shadow font-semibold transition active:scale-95 text-sm">Light</button>
+        <button id="theme-black-button" class="px-4 py-2 bg-black text-white rounded-lg shadow font-semibold transition active:scale-95 text-sm">Dark</button>
+    </div>
+
+    <!-- Main App Screens -->
+    <div class="w-full text-center mt-20 mb-2">
+        <!-- Adjusted margin-top for theme buttons -->
+        <h2 class="text-3xl font-extrabold text-theme-primary">Main App</h2>
+    </div>
     <div class="horizontal-scroll">
         <!-- Home Page -->
         <div class="device-frame flex flex-col">
-            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
-                <!-- App Title -->
-                <div class="flex items-center gap-3">
-                    <span class="ph ph-lightning text-2xl text-black"></span>
-                    <h1 class="text-2xl font-bold tracking-tight text-black">AI Workout</h1>
+            <div class="p-6 flex flex-col gap-8 flex-1 overflow-y-auto animate-fadeIn animate-slideUp">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="ph ph-lightning text-2xl icon-theme-primary"></span>
+                    <h1 class="text-2xl font-extrabold text-theme-primary">AI Workout</h1>
                 </div>
-                <!-- Welcome Card -->
-                <div class="rounded-2xl shadow-lg bg-gradient-to-br from-blue-200 to-purple-200 p-6 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                    <h2 class="text-lg font-semibold text-black">Welcome back!</h2>
-                    <p class="text-black text-opacity-80">Track your workouts, analyze progress, and let AI help you reach your goals.</p>
+                <div class="rounded-2xl p-6 flex flex-col gap-2 animate-fadeIn animate-slideUp welcome-card-gradient shadow-lg-theme">
+                    <h2 class="text-2xl font-extrabold text-on-gradient">Welcome back!</h2>
+                    <p class="text-on-gradient text-opacity-80">Track your workouts, analyze progress, and let AI help you reach your goals.</p>
                 </div>
-                <!-- Quick Actions -->
                 <div class="flex gap-4 mt-2">
-                    <button class="flex-1 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-3 rounded-xl shadow transition-all duration-200 hover:scale-105 active:scale-95">Start Workout</button>
-                    <button class="flex-1 bg-white border border-blue-200 text-black font-semibold py-3 rounded-xl shadow transition-all duration-200 hover:scale-105 active:scale-95">Import Plan</button>
+                    <button class="flex-1 text-lg font-semibold rounded-2xl py-4 transition-all duration-200 hover:scale-105 active:scale-95 bg-theme-interactive text-theme-interactive shadow-theme">Start Workout</button>
+                    <button class="flex-1 text-lg font-semibold rounded-2xl py-4 transition-all duration-200 hover:scale-105 active:scale-95 bg-theme-interactive-secondary text-theme-interactive-secondary shadow-theme">Import Plan</button>
                 </div>
-                <!-- Recent Workouts Card -->
-                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3 mt-4 animate-fadeIn animate-slideUp">
+                <div class="rounded-2xl p-4 flex flex-col gap-3 mt-4 animate-fadeIn animate-slideUp bg-theme-primary shadow-theme">
                     <div class="flex items-center justify-between">
-                        <h3 class="font-semibold text-black">Recent Workouts</h3>
-                        <a href="#" class="text-blue-500 text-sm font-medium">See all</a>
+                        <h3 class="text-lg font-extrabold text-theme-primary">Recent Workouts</h3>
+                        <a href="#" class="text-theme-secondary text-sm font-medium">See all</a>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                        <div class="flex items-center gap-3 p-2 rounded-2xl hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Legs & Shoulders</div>
-                                <div class="text-xs text-black text-opacity-60">21 May 2025 · 31s · 3630kg</div>
+                                <div class="font-semibold text-theme-primary">Legs & Shoulders</div>
+                                <div class="text-xs text-theme-secondary">21 May 2025 · 31s · 3630kg</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right icon-theme-primary"></span>
                         </div>
-                        <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                        <div class="flex items-center gap-3 p-2 rounded-2xl hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Back</div>
-                                <div class="text-xs text-black text-opacity-60">26 May 2024 · 220h 42m · 5056kg</div>
+                                <div class="font-semibold text-theme-primary">Back</div>
+                                <div class="text-xs text-theme-secondary">26 May 2024 · 220h 42m · 5056kg</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right icon-theme-primary"></span>
                         </div>
                     </div>
                 </div>
-                <!-- Progress Graph Card -->
-                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 mt-4 animate-fadeIn animate-slideUp">
+                <div class="rounded-2xl p-4 flex flex-col gap-2 mt-4 animate-fadeIn animate-slideUp bg-theme-primary shadow-theme">
                     <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-semibold text-black">Workouts Per Week</h3>
-                        <span class="text-xs text-black text-opacity-60">Activity</span>
+                        <h3 class="text-lg font-extrabold text-theme-primary">Workouts Per Week</h3>
+                        <span class="text-xs text-theme-secondary">Activity</span>
                     </div>
                     <div class="w-full h-32 flex items-end">
-                        <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                            <polyline
-                                fill="none"
-                                stroke="#7C3AED"
-                                stroke-width="3"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                points="0,70 40,60 80,65 120,50 160,40 200,30 240,20 280,10"
-                            />
-                            <circle cx="0" cy="70" r="3" fill="#7C3AED" />
-                            <circle cx="40" cy="60" r="3" fill="#7C3AED" />
-                            <circle cx="80" cy="65" r="3" fill="#7C3AED" />
-                            <circle cx="120" cy="50" r="3" fill="#7C3AED" />
-                            <circle cx="160" cy="40" r="3" fill="#7C3AED" />
-                            <circle cx="200" cy="30" r="3" fill="#7C3AED" />
-                            <circle cx="240" cy="20" r="3" fill="#7C3AED" />
-                            <circle cx="280" cy="10" r="3" fill="#7C3AED" />
-                            <!-- X Axis Labels -->
-                            <text x="0" y="78" font-size="10" fill="#000">31/3</text>
-                            <text x="40" y="78" font-size="10" fill="#000">7/4</text>
-                            <text x="80" y="78" font-size="10" fill="#000">14/4</text>
-                            <text x="120" y="78" font-size="10" fill="#000">21/4</text>
-                            <text x="160" y="78" font-size="10" fill="#000">28/4</text>
-                            <text x="200" y="78" font-size="10" fill="#000">5/5</text>
-                            <text x="240" y="78" font-size="10" fill="#000">12/5</text>
-                            <text x="280" y="78" font-size="10" fill="#000">19/5</text>
-                            <!-- Y Axis -->
-                            <text x="-5" y="70" font-size="10" fill="#000">0</text>
-                            <text x="-5" y="30" font-size="10" fill="#000">3</text>
+                        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <polyline fill="none" class="progress-graph-stroke" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="0,70 40,60 80,65 120,50 160,40 200,30 240,20 280,10" />
+                            <circle cx="0" cy="70" r="3" class="progress-graph-fill"/> <circle cx="40" cy="60" r="3" class="progress-graph-fill" /> <circle cx="80" cy="65" r="3" class="progress-graph-fill" /> <circle cx="120" cy="50" r="3" class="progress-graph-fill" />
+                            <circle cx="160" cy="40" r="3" class="progress-graph-fill" /> <circle cx="200" cy="30" r="3" class="progress-graph-fill" /> <circle cx="240" cy="20" r="3" class="progress-graph-fill" /> <circle cx="280" cy="10" r="3" class="progress-graph-fill" />
+                            <text x="0" y="78" font-size="10" class="fill-current text-theme-secondary">31/3</text> <text x="40" y="78" font-size="10" class="fill-current text-theme-secondary">7/4</text>
+                            <text x="80" y="78" font-size="10" class="fill-current text-theme-secondary">14/4</text> <text x="120" y="78" font-size="10" class="fill-current text-theme-secondary">21/4</text>
+                            <text x="160" y="78" font-size="10" class="fill-current text-theme-secondary">28/4</text> <text x="200" y="78" font-size="10" class="fill-current text-theme-secondary">5/5</text>
+                            <text x="240" y="78" font-size="10" class="fill-current text-theme-secondary">12/5</text> <text x="280" y="78" font-size="10" class="fill-current text-theme-secondary">19/5</text>
+                            <text x="-5" y="70" font-size="10" class="fill-current text-theme-secondary">0</text> <text x="-5" y="30" font-size="10" class="fill-current text-theme-secondary">3</text>
                         </svg>
                     </div>
                 </div>
             </div>
-            <!-- Bottom Navigation -->
-            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
-                <button class="flex flex-col items-center text-blue-500 transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
-                <button class="flex flex-col items-center text-black transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            <nav class="flex justify-around items-center py-3 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95 text-theme-accent"><span class="ph ph-house text-xl"></span><span class="text-xs font-semibold">Home</span></button>
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl icon-theme-primary"></span><span class="text-xs font-semibold text-theme-primary">Start</span></button>
             </nav>
         </div>
         <!-- Workout Tracking Page -->
         <div class="device-frame flex flex-col">
             <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
-                <!-- Header -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-arrow-left text-xl text-black"></span></button>
-                        <h2 class="text-xl font-bold text-black ml-2">Legs & Shoulders</h2>
+                        <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-arrow-left text-xl icon-theme-primary"></span></button>
+                        <h2 class="text-2xl font-extrabold text-theme-primary ml-2">Legs & Shoulders</h2>
                     </div>
-                    <button class="bg-green-400 text-white font-semibold px-4 py-2 rounded-xl shadow hover:scale-105 transition">Finish</button>
+                    <button class="text-lg font-semibold rounded-2xl py-3 px-6 transition-all duration-200 hover:scale-105 active:scale-95 bg-theme-interactive text-theme-interactive shadow-theme">Finish</button>
                 </div>
-                <!-- Workout Info Card -->
-                <div class="rounded-2xl bg-gradient-to-br from-blue-100 to-purple-100 shadow p-4 flex items-center gap-4 animate-fadeIn animate-slideUp">
-                    <span class="ph ph-calendar text-lg text-black"></span>
-                    <span class="text-black font-medium">23 May 2025</span>
-                    <span class="ph ph-timer text-lg text-black ml-4"></span>
-                    <span class="text-black font-medium">0:03</span>
+                <div class="rounded-2xl p-4 flex items-center gap-4 animate-fadeIn animate-slideUp welcome-card-gradient shadow-theme">
+                    <span class="ph ph-calendar text-lg text-on-gradient"></span>
+                    <span class="text-on-gradient font-medium">23 May 2025</span>
+                    <span class="ph ph-timer text-lg text-on-gradient ml-4"></span>
+                    <span class="text-on-gradient font-medium">0:03</span>
                 </div>
-                <!-- Exercise Card: Seated Leg Press -->
-                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3 animate-fadeIn animate-slideUp">
+                <div class="rounded-2xl p-4 flex flex-col gap-3 animate-fadeIn animate-slideUp bg-theme-primary shadow-theme">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
-                            <span class="font-semibold text-black">Seated Leg Press (Machine)</span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
+                            <span class="font-semibold text-theme-primary">Seated Leg Press (Machine)</span>
                         </div>
-                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-link text-black"></span></button>
+                        <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-link icon-theme-primary"></span></button>
                     </div>
-                    <div class="grid grid-cols-4 gap-2 text-xs font-medium text-black text-opacity-70 mt-2">
+                    <div class="grid grid-cols-4 gap-2 text-xs font-medium text-theme-secondary mt-2">
                         <div>Set</div>
                         <div>kg</div>
                         <div>Reps</div>
                         <div>Done</div>
                     </div>
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-1 text-theme-primary">
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">W</div>
-                            <div class="text-black">60</div>
-                            <div class="text-black">15</div>
+                            <div class="text-theme-primary">W</div>
+                            <div class="text-theme-primary">60</div>
+                            <div class="text-theme-primary">15</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">W</div>
-                            <div class="text-black">80</div>
-                            <div class="text-black">15</div>
+                            <div class="text-theme-primary">W</div>
+                            <div class="text-theme-primary">80</div>
+                            <div class="text-theme-primary">15</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">1</div>
-                            <div class="text-black">110</div>
-                            <div class="text-black">10</div>
+                            <div class="text-theme-primary">1</div>
+                            <div class="text-theme-primary">110</div>
+                            <div class="text-theme-primary">10</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">2</div>
-                            <div class="text-black">110</div>
-                            <div class="text-black">8</div>
+                            <div class="text-theme-primary">2</div>
+                            <div class="text-theme-primary">110</div>
+                            <div class="text-theme-primary">8</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">3</div>
-                            <div class="text-black">110</div>
-                            <div class="text-black">8</div>
+                            <div class="text-theme-primary">3</div>
+                            <div class="text-theme-primary">110</div>
+                            <div class="text-theme-primary">8</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 items-center">
-                            <div class="text-black">4</div>
-                            <div class="text-black">110</div>
-                            <div class="text-black">6</div>
+                            <div class="text-theme-primary">4</div>
+                            <div class="text-theme-primary">110</div>
+                            <div class="text-theme-primary">6</div>
                             <span class="ph ph-check text-green-400"></span>
                         </div>
                     </div>
-                    <button class="mt-2 bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-2 rounded-xl shadow transition-all duration-200 active:scale-95">+ Add Set</button>
+                    <button class="mt-2 text-lg font-semibold py-3 rounded-2xl transition-all duration-200 active:scale-95 bg-theme-interactive text-theme-interactive shadow-theme">+ Add Set</button>
                 </div>
-                <!-- Exercise Card: Leg Extension -->
-                <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-3 animate-fadeIn animate-slideUp">
+                <div class="rounded-2xl bg-theme-primary p-4 flex flex-col gap-3 animate-fadeIn animate-slideUp shadow-theme">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
-                            <span class="font-semibold text-black">Leg Extension (Machine)</span>
+                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
+                            <span class="font-semibold text-theme-primary">Leg Extension (Machine)</span>
                         </div>
-                        <button class="bg-white rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-link text-black"></span></button>
+                        <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-link icon-theme-primary"></span></button>
                     </div>
                     <div class="flex flex-col gap-2 mt-2">
-                        <div class="bg-blue-50 rounded-lg p-2 text-black text-opacity-70">una gamba</div>
-                        <div class="bg-blue-50 rounded-lg p-2 text-black text-opacity-70">alzare</div>
+                        <div class="bg-theme-interactive-secondary rounded-lg p-2 text-theme-secondary">una gamba</div>
+                        <div class="bg-theme-interactive-secondary rounded-lg p-2 text-theme-secondary">alzare</div>
                     </div>
                 </div>
             </div>
-            <!-- Bottom Navigation (same as Home) -->
-            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
-                <button class="flex flex-col items-center text-blue-500 transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
-                <button class="flex flex-col items-center text-black transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            <nav class="flex justify-around items-center py-3 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95 text-theme-accent"><span class="ph ph-house text-xl"></span><span class="text-xs font-semibold">Home</span></button>
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl icon-theme-primary"></span><span class="text-xs font-semibold text-theme-primary">Start</span></button>
             </nav>
         </div>
         <!-- Start Page -->
         <div class="device-frame flex flex-col">
             <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
-                <!-- Header -->
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="ph ph-plus-circle text-2xl text-blue-500"></span>
-                    <h1 class="text-2xl font-bold tracking-tight text-black">Start Workout</h1>
+                    <span class="ph ph-plus-circle text-2xl text-theme-accent-alt"></span>
+                    <h1 class="text-2xl font-extrabold text-theme-primary">Start Workout</h1>
                 </div>
-                <!-- Start Empty Workout -->
-                <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-2xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Start an Empty Workout</button>
-                <!-- My Templates -->
+                <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Start an Empty Workout</button>
                 <div>
                     <div class="flex items-center justify-between mb-2">
-                        <h2 class="text-lg font-semibold text-black">My Templates</h2>
-                        <button class="bg-white border border-blue-200 text-black rounded-xl px-3 py-1 text-xs font-medium shadow hover:scale-105 transition">+ Template</button>
+                        <h2 class="text-lg font-extrabold text-theme-primary">My Templates</h2>
+                        <button class="rounded-xl px-4 py-2 text-sm font-semibold hover:scale-105 transition bg-theme-interactive-secondary text-theme-interactive-secondary shadow-theme">+ Template</button>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                        <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Legs & Shoulders</div>
-                                <div class="text-xs text-black text-opacity-60">Seated Leg Press, Leg Extension...</div>
+                                <div class="font-medium text-theme-primary">Legs & Shoulders</div>
+                                <div class="text-xs text-theme-secondary">Seated Leg Press, Leg Extension...</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
-                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                        <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Back</div>
-                                <div class="text-xs text-black text-opacity-60">Lat Machine, Row, Pulldown...</div>
+                                <div class="font-medium text-theme-primary">Back</div>
+                                <div class="text-xs text-theme-secondary">Lat Machine, Row, Pulldown...</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
                     </div>
                 </div>
-                <!-- Example Templates -->
                 <div>
                     <div class="flex items-center justify-between mb-2 mt-4">
-                        <h2 class="text-lg font-semibold text-black">Example Templates</h2>
+                        <h2 class="text-lg font-semibold text-theme-primary">Example Templates</h2>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-blue-500"></span>
+                        <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Strong 5x5 - Workout B</div>
-                                <div class="text-xs text-black text-opacity-60">Squat, Overhead Press, Deadlift</div>
+                                <div class="font-medium text-theme-primary">Strong 5x5 - Workout B</div>
+                                <div class="text-xs text-theme-secondary">Squat, Overhead Press, Deadlift</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
-                        <div class="rounded-2xl bg-white shadow p-4 flex items-center gap-4 hover:bg-blue-50 transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp">
-                            <span class="ph ph-dumbbell text-xl text-purple-500"></span>
+                        <div class="rounded-2xl bg-theme-primary p-4 flex items-center gap-4 hover:bg-theme-interactive-secondary transition-all duration-200 hover:scale-102 animate-fadeIn animate-slideUp shadow-theme">
+                            <span class="ph ph-dumbbell text-xl text-theme-accent-alt"></span>
                             <div class="flex-1">
-                                <div class="font-medium text-black">Legs</div>
-                                <div class="text-xs text-black text-opacity-60">Squat, Leg Extension, Calf Raise</div>
+                                <div class="font-medium text-theme-primary">Legs</div>
+                                <div class="text-xs text-theme-secondary">Squat, Leg Extension, Calf Raise</div>
                             </div>
-                            <span class="ph ph-arrow-right text-black"></span>
+                            <span class="ph ph-arrow-right text-theme-primary"></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Bottom Navigation (Start Active) -->
-            <nav class="flex justify-around items-center bg-white py-3 border-t border-gray-100 rounded-b-2xl">
-                <button class="flex flex-col items-center text-black transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-house text-xl"></span><span class="text-xs font-medium">Home</span></button>
-                <button class="flex flex-col items-center text-blue-500 transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-plus-circle text-xl"></span><span class="text-xs font-medium">Start</span></button>
+            <nav class="flex justify-around items-center py-3 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95"><span class="ph ph-house text-xl icon-theme-primary"></span><span class="text-xs font-semibold text-theme-primary">Home</span></button>
+                <button class="flex flex-col items-center transition-all duration-200 hover:scale-110 active:scale-95 text-theme-accent-alt"><span class="ph ph-plus-circle text-xl "></span><span class="text-xs font-semibold">Start</span></button>
             </nav>
         </div>
+    </div>
+    <!-- Image Processing Screens -->
+    <div class="w-full text-center mt-8 mb-2">
+        <h2 class="text-3xl font-extrabold text-theme-primary">Image Processing</h2>
     </div>
     <div class="horizontal-scroll">
         <!-- Camera/Scan Workout Page -->
         <div class="device-frame flex flex-col relative overflow-hidden">
-            <!-- Top Bar -->
-            <div class="flex items-center justify-between px-4 pt-4 pb-2 bg-white bg-opacity-60 rounded-t-2xl shadow-sm">
-                <button class="bg-white bg-opacity-80 rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-arrow-left text-xl text-black"></span></button>
-                <span class="text-base font-semibold text-black">Scan Workout</span>
-                <button class="bg-white bg-opacity-80 rounded-full p-2 shadow hover:scale-110 transition"><span class="ph ph-dots-three-outline text-xl text-black"></span></button>
+            <div class="flex items-center justify-between px-4 pt-4 pb-2 bg-theme-bg-primary bg-opacity-60 rounded-t-2xl shadow-sm">
+                <button class="bg-theme-bg-primary bg-opacity-80 rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-arrow-left text-xl icon-theme-primary"></span></button>
+                <span class="text-base font-semibold text-theme-primary">Scan Workout</span>
+                <button class="bg-theme-bg-primary bg-opacity-80 rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-dots-three-outline text-xl icon-theme-primary"></span></button>
             </div>
-            <!-- Camera Preview (background image) -->
             <div class="flex-1 flex items-center justify-center relative">
                 <img src='./images.jpeg' alt='Camera preview' class='absolute inset-0 w-full h-full object-cover' />
-                <!-- Subtle dark overlay for contrast -->
-                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-                <!-- Overlay Frame -->
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="border-2 border-white border-opacity-90 rounded-2xl shadow-lg" style="width: 240px; height: 180px;"></div>
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div> {/* Darker overlay for better text/icon visibility */}
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none animate-fadeIn animate-slideUp">
+                    <div class="border-2 border-white border-opacity-90 rounded-2xl animate-fadeIn animate-slideUp shadow-lg-theme" style="width: 240px; height: 180px;"></div>
                 </div>
             </div>
-            <!-- Bottom Bar -->
-            <div class="relative z-10 flex flex-col items-center pb-8 pt-2 bg-white bg-opacity-60 rounded-b-2xl shadow-sm">
+            <div class="relative z-10 flex flex-col items-center pb-8 pt-2 bg-theme-bg-primary bg-opacity-60 rounded-b-2xl shadow-sm">
                 <div class="flex items-center justify-center h-20">
-                    <button class="bg-white rounded-full p-6 shadow-lg border-4 border-black transition hover:scale-105 active:scale-95"></button>
+                    <button class="rounded-full p-6 border-4 transition hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive border-color-theme-text-interactive shadow-lg-theme"></button>
                 </div>
+            </div>
+            <div class="p-6 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
+                <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Save workout</button>
             </div>
         </div>
-        <!-- Loading Page: Creating Workout Plan from Picture -->
-        <div class="device-frame flex flex-col justify-center items-center">
-            <div class="flex flex-col items-center justify-center flex-1 w-full">
-                <div class="rounded-2xl bg-white shadow-lg p-8 flex flex-col items-center gap-6 animate-fadeIn animate-slideUp" style="min-width: 280px; max-width: 320px;">
-                    <!-- Animated Spinner -->
-                    <svg class="animate-spin h-14 w-14 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                    </svg>
-                    <div class="text-xl font-semibold text-black text-center">Creating the workout plan from the picture</div>
-                </div>
-            </div>
-        </div>
-        <!-- Detected Workout Plan Page -->
-        <div class="device-frame flex flex-col" style="margin: 2rem;">
-            <div class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
-                <!-- App Name -->
-                <div class="text-sm font-bold text-black text-opacity-60 mb-1">AI Workout</div>
-                <!-- Header -->
-                <div class="flex items-center gap-3 mb-2">
-                    <span class="ph ph-detective text-2xl text-blue-500"></span>
-                    <h1 class="text-2xl font-bold tracking-tight text-black">Detected Workout Plan</h1>
-                </div>
-                <!-- Detected Plan Cards -->
-                <div class="flex flex-col gap-4">
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-purple-500"></span>
-                                <span class="font-semibold text-black">Seated Leg Press (Machine)</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>4 sets</div>
-                            <div>110 kg</div>
-                            <div>8-10 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-blue-500"></span>
-                                <span class="font-semibold text-black">Leg Extension (Machine)</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>3 sets</div>
-                            <div>60 kg</div>
-                            <div>12 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-purple-500"></span>
-                                <span class="font-semibold text-black">Romanian Deadlift</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>4 sets</div>
-                            <div>80 kg</div>
-                            <div>10 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-yellow-400"></span>
-                                <span class="font-semibold text-black">Lateral Raise (Dumbbell)</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>3 sets</div>
-                            <div>10 kg</div>
-                            <div>12 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-green-500"></span>
-                                <span class="font-semibold text-black">Military Press (Dumbbells)</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>4 sets</div>
-                            <div>16 kg</div>
-                            <div>10 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-pink-500"></span>
-                                <span class="font-semibold text-black">Seated Calf Raise</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>5 sets</div>
-                            <div>60 kg</div>
-                            <div>15 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-cyan-500"></span>
-                                <span class="font-semibold text-black">Rear Delt Fly</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>3 sets</div>
-                            <div>8 kg</div>
-                            <div>15 reps</div>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl bg-white shadow p-4 flex flex-col gap-2 animate-fadeIn animate-slideUp">
-                        <div class="flex items-center gap-2 mb-1 justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="ph ph-dumbbell text-xl text-gray-700"></span>
-                                <span class="font-semibold text-black">Plank</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="p-2 rounded-full hover:bg-blue-100 transition-all duration-200" aria-label="Edit Exercise"><span class="ph ph-pencil text-black text-lg"></span></button>
-                                <button class="p-2 rounded-full hover:bg-red-100 transition-all duration-200" aria-label="Remove Exercise"><span class="ph ph-trash text-red-500 text-lg"></span></button>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 text-black text-opacity-80 text-sm">
-                            <div>3 sets</div>
-                            <div>—</div>
-                            <div>60 sec</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Save Workout Button -->
-            <div class="p-6 bg-white border-t border-gray-100 rounded-b-2xl">
-                <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Save workout</button>
-            </div>
-        </div>
-    </div>
-    <div class="horizontal-scroll">
         <!-- Edit Exercise Page -->
         <div class="device-frame flex flex-col">
             <form class="p-6 flex flex-col gap-6 flex-1 overflow-y-auto">
-                <!-- Header -->
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="ph ph-pencil text-2xl text-blue-500"></span>
-                    <h1 class="text-2xl font-bold tracking-tight text-black">Edit Exercise</h1>
+                    <span class="ph ph-pencil text-2xl text-theme-accent-alt"></span>
+                    <h1 class="text-2xl font-extrabold text-theme-primary">Edit Exercise</h1>
                 </div>
-                <!-- Form Fields -->
                 <div class="flex flex-col gap-4">
                     <div>
-                        <label class="block text-black font-medium mb-1" for="exercise-name">Exercise Name</label>
-                        <input id="exercise-name" type="text" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="Seated Leg Press (Machine)">
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-name-edit">Exercise Name</label>
+                        <input id="exercise-name-edit" type="text" class="w-full rounded-xl p-3 transition input-field-style" value="Seated Leg Press (Machine)">
                     </div>
                     <div>
-                        <label class="block text-black font-medium mb-1" for="exercise-type">Type</label>
-                        <select id="exercise-type" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
-                            <option>Machine</option>
-                            <option>Dumbbell</option>
-                            <option>Barbell</option>
-                            <option>Bodyweight</option>
-                            <option>Cable</option>
-                            <option>Other</option>
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-type-edit">Type</label>
+                        <select id="exercise-type-edit" class="w-full rounded-xl p-3 transition input-field-style">
+                            <option>Machine</option> <option>Dumbbell</option> <option>Barbell</option> <option>Bodyweight</option> <option>Other</option>
                         </select>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="flex-1">
-                            <label class="block text-black font-medium mb-1" for="sets">Sets</label>
-                            <input id="sets" type="number" min="1" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="4">
-                        </div>
-                        <div class="flex-1">
-                            <label class="block text-black font-medium mb-1" for="weight">Weight (kg)</label>
-                            <input id="weight" type="number" min="0" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="110">
-                        </div>
-                        <div class="flex-1">
-                            <label class="block text-black font-medium mb-1" for="reps">Reps</label>
-                            <input id="reps" type="number" min="1" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" value="10">
-                        </div>
+                    <div>
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-sets-edit">Sets</label>
+                        <input id="exercise-sets-edit" type="number" class="w-full rounded-xl p-3 transition input-field-style" value="4">
                     </div>
                     <div>
-                        <label class="block text-black font-medium mb-1" for="notes">Notes</label>
-                        <textarea id="notes" rows="2" class="w-full rounded-xl border border-gray-200 p-3 text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 transition" placeholder="Add any notes..."></textarea>
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-weight-edit">Weight (kg)</label>
+                        <input id="exercise-weight-edit" type="number" step="0.5" class="w-full rounded-xl p-3 transition input-field-style" value="110">
+                    </div>
+                    <div>
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-reps-edit">Reps</label>
+                        <input id="exercise-reps-edit" type="text" class="w-full rounded-xl p-3 transition input-field-style" value="8-10">
+                    </div>
+                    <div>
+                        <label class="block text-theme-primary font-medium mb-1" for="exercise-notes-edit">Notes</label>
+                        <textarea id="exercise-notes-edit" rows="3" class="w-full rounded-xl p-3 transition input-field-style" placeholder="e.g., focus on form, slow eccentric..."></textarea>
                     </div>
                 </div>
             </form>
-            <!-- Save Changes Button -->
-            <div class="p-6 bg-white border-t border-gray-100 rounded-b-2xl">
-                <button class="w-full bg-gradient-to-r from-blue-400 to-purple-400 text-white font-semibold py-4 rounded-xl shadow-lg text-lg transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp">Save Changes</button>
+            <div class="p-6 border-t rounded-b-2xl border-theme-subtle bg-theme-primary">
+                <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Save Changes</button>
             </div>
         </div>
     </div>
+    <!-- Onboarding Screens -->
+    <div class="w-full text-center mt-8 mb-2">
+        <h2 class="text-3xl font-extrabold text-theme-primary">Onboarding</h2>
+    </div>
+    <div class="horizontal-scroll">
+        <!-- Onboarding Page 1 -->
+        <div class="device-frame flex flex-col bg-theme-primary">
+            <div class="flex flex-col flex-1 p-6 gap-8 animate-fadeIn animate-slideUp">
+                <div class="flex items-center gap-2 mb-2">
+                    <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-arrow-left text-xl icon-theme-primary"></span></button>
+                    <div class="flex-1 h-2 mx-2 rounded-full overflow-hidden bg-theme-interactive-secondary">
+                        <div class="h-2 rounded-full w-1/3 bg-theme-interactive"></div>
+                    </div>
+                </div>
+                <div class="text-2xl font-extrabold text-theme-primary">What is your main fitness goal?</div>
+                <div class="flex flex-col gap-4">
+                    <button class="flex items-center gap-3 text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-selected shadow-theme"><span class="ph ph-arm-flexed text-2xl"></span>Build Muscle</button>
+                    <button class="flex items-center gap-3 text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-default shadow-theme"><span class="ph ph-fire text-2xl"></span>Lose Weight</button>
+                    <button class="flex items-center gap-3 text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-default shadow-theme"><span class="ph ph-heartbeat text-2xl"></span>Improve Endurance</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Continue</button>
+            </div>
+        </div>
+        <!-- Onboarding Page 2 -->
+        <div class="device-frame flex flex-col bg-theme-primary">
+            <div class="flex flex-col flex-1 p-6 gap-8 animate-fadeIn animate-slideUp">
+                <div class="flex items-center gap-2 mb-2">
+                    <button class="bg-theme-bg-primary rounded-full p-2 hover:scale-110 transition shadow-theme"><span class="ph ph-arrow-left text-xl icon-theme-primary"></span></button>
+                    <div class="flex-1 h-2 mx-2 rounded-full overflow-hidden bg-theme-interactive-secondary">
+                        <div class="h-2 rounded-full w-2/3 bg-theme-interactive"></div>
+                    </div>
+                </div>
+                <div class="text-2xl font-extrabold text-theme-primary">How many days per week do you want to work out?</div>
+                <div class="flex flex-col gap-4">
+                    <button class="flex items-center justify-center text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-selected shadow-theme">2</button>
+                    <button class="flex items-center justify-center text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-default shadow-theme">3</button>
+                    <button class="flex items-center justify-center text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-default shadow-theme">4</button>
+                    <button class="flex items-center justify-center text-lg font-semibold rounded-2xl px-6 py-4 transition-all animate-fadeIn animate-slideUp button-group-default shadow-theme">5+</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <button class="w-full text-lg font-semibold py-4 rounded-2xl transition-all animate-fadeIn animate-slideUp bg-theme-interactive text-theme-interactive shadow-lg-theme">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const whiteModeButton = document.getElementById('theme-white-button');
+        const blackModeButton = document.getElementById('theme-black-button');
+        const body = document.body;
+
+        whiteModeButton.addEventListener('click', () => {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+        });
+
+        blackModeButton.addEventListener('click', () => {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        });
+
+        // Apply saved theme on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode'); // Default to light
+        }
+    </script>
 </body>
 
 </html>
